@@ -372,5 +372,109 @@ body{
 
 
 
+
+
+
+<!-- body'r kaj ekhan theke -->
+
+
+<body>
+
+
+
+<!-- NAVBAR  shuruuu -->
+
+
+<header class="navbar">
+  <div class="brand">
+   <div class="logo" aria-hidden="true">
+  <img src="logo.png" alt="Logo" />
+</div>
+
+    <div>
+      <h1 style="color: #0b6b3a;">Emergency <br> Service</h1>
+     
+    </div>
+  </div>
+  <div class="nav-stats" aria-hidden="true">
+    <div class="stat" title="Favorited">
+      <i class="fa-solid fa-heart icon" style="color:#ef4444;"></i>
+
+      <div id="nav-heart-count">0</div>
+    </div>
+
+
+    <div class="stat" title="Coins">
+      <i class="fa-solid fa-coins icon" style="color:#d69e2e;"></i>
+      <div id="coin-count">100</div>
+    </div>
+    <!-- <div class="stat" title="Copies">
+      <i class="fa-regular fa-copy icon"></i>
+      <div id="copy-count">0</div>
+    </div> -->
+    <button class="btn-green" id="dummy-action" style="margin-left:8px">2 Copy</button>
+  </div>
+</header>
+
+
+
+
+
+<!-- HERO EKHAN THEKE SHURRU  -->
+
+<section class="hero">
+  <div class="hero-logo-wrapper">
+   
+    <img src="logo.png" alt="Government Logo" class="hero-logo" />
+  </div>
+  <h2 class="hero-title">Emergency Service Directory</h2>
+  <p class="hero-slogan">
+    Government Emergency Services at Your Fingertip – A Project by Government of the People's Republic of Bangladesh
+  </p>
+</section>
+
+
+
+
+<!-- MAIN SECTION ER LAYOUT  START--> 
+<main class="container">
+  <!-- LEFT: Card Grid -->
+  <section>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <!-- <div>
+        <h3 style="margin:0;font-size:18px">Emergency Hotlines</h3>
+        <div class="small-muted">Government & essential services</div>
+      </div>
+      <div class="small-muted">Showing 9 services</div> -->
+    </div>
+    <div class="cards-grid" id="cardsGrid">
+      <!-- CARDS  HOBE   JS  THEKE -->
+    </div>
+  </section>
+
+  
+
+
+  
+  <!-- RIGHT SIDE ER HISTORY PART  -->
+  <aside class="history" aria-live="polite">
+    <div class="header">
+      <div class="title">
+        <i class="fa-regular fa-clock"></i>
+        <span>Call History</span>
+      </div>
+      <!-- <button id="clearHistoryBtn" class="btn" style="background:#e8fff2;border:none">Clear</button> -->
+   <button id="clearHistoryBtn" class="btn-clear">Clear</button>
+
+    </div>
+    <div class="list" id="historyList">
+      <div class="small-muted" style="padding:8px 4px">No calls yet</div>
+    </div>
+  </aside>
+</main>
+
+
+
+
 </body>
 </html>
