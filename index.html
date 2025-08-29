@@ -388,7 +388,7 @@ body{
 <header class="navbar">
   <div class="brand">
    <div class="logo" aria-hidden="true">
-  <img src="logo.png" alt="Logo" />
+  <img src="assets/logo.png" alt="Logo" />
 </div>
 
     <div>
@@ -425,7 +425,7 @@ body{
 <section class="hero">
   <div class="hero-logo-wrapper">
    
-    <img src="logo.png" alt="Government Logo" class="hero-logo" />
+    <img src="assets/logo.png" alt="Government Logo" class="hero-logo" />
   </div>
   <h2 class="hero-title">Emergency Service Directory</h2>
   <p class="hero-slogan">
@@ -455,7 +455,7 @@ body{
   
 
 
-  
+
   <!-- RIGHT SIDE ER HISTORY PART  -->
   <aside class="history" aria-live="polite">
     <div class="header">
@@ -474,6 +474,178 @@ body{
 </main>
 
 
+
+
+
+<!-- bejhal shuru ekhan theke -->
+
+<script>
+// servises er jonno img 
+const services = [
+  { id:1, icon:'fa-solid fa-triangle-exclamation', name:'National Emergency Number', name_en:'National Emergency', number:'999', category:'All', img: 'assets/emergency.png' },
+  { id:2, icon:'fa-solid fa-user-police', name:'Police Helpline Number', name_en:'Police', number:'999', category:'Police', img: 'assets/police.png' },
+  { id:3, icon:'fa-solid fa-fire-extinguisher', name:'Fire Service Number', name_en:'Fire Service', number:'999', category:'Fire', img: 'assets/fire-service.png' },
+  { id:4, icon:'fa-solid fa-ambulance', name:'Ambulance Service', name_en:'Ambulance', number:'1994-999999', category:'Health', img: 'assets/ambulance.png' },
+  { id:5, icon:'fa-solid fa-child-reaching', name:'Women & Child Helpline', name_en:'Women & Child Helpline', number:'109', category:'Help', img: 'assets/child.png' },
+  { id:6, icon:'fa-solid fa-gavel', name:'Anti-Corruption Helpline', name_en:'Anti-Corruption', number:'106', category:'Govt.', img: 'assets/anti.png' },
+  { id:7, icon:'fa-solid fa-bolt', name:'Electricity Helpline', name_en:'Electricity Outage', number:'16216', category:'Electricity', img: 'assets/bpdb.png' },
+  { id:8, icon:'fa-solid fa-hands-helping', name:'Brac Helpline', name_en:'Brac', number:'16445', category:'NGO', img: 'assets/brac.png' },
+  { id:9, icon:'fa-solid fa-train', name:'Bangladesh Railway Helpline', name_en:'Bangladesh Railway', number:'163', category:'Travel', img: 'assets/Bangladesh-Railway.png' }
+];
+
+
+// counting er jonno 
+let heartCount = 0;
+let coinCount = 100;
+let copyCount = 0;
+let callHistory = [];
+
+// callllll
+const cardsGrid = document.getElementById('cardsGrid');
+const navHeart = document.getElementById('nav-heart-count');
+const coinCountEl = document.getElementById('coin-count');
+const copyCountEl = document.getElementById('copy-count');
+const historyList = document.getElementById('historyList');
+const dummyActionBtn = document.getElementById('dummy-action');
+const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+
+function createEl(tag, className, text) {
+  const el = document.createElement(tag);
+  if(className) el.className = className;
+  if(text) el.textContent = text;
+  return el;
+}
+
+function addCallHistory(name, number) {
+  callHistory.unshift({name, number, time: new Date()});
+  if(callHistory.length > 50) callHistory.pop();
+  renderCallHistory();
+}
+
+function renderCallHistory() {
+  historyList.innerHTML = '';
+  if(callHistory.length === 0) {
+    const noCalls = createEl('div','small-muted','No calls yet');
+    noCalls.style.padding = '8px 4px';
+    historyList.appendChild(noCalls);
+    return;
+  }
+  callHistory.forEach(item => {
+    const itemEl = createEl('div','item');
+    const left = createEl('div');
+    left.textContent = `${item.name} (${item.number})`;
+    const right = createEl('div','small-muted');
+    right.textContent = item.time.toLocaleString();
+    itemEl.appendChild(left);
+    itemEl.appendChild(right);
+    historyList.appendChild(itemEl);
+  });
+}
+
+clearHistoryBtn.onclick = () => {
+  callHistory = [];
+  renderCallHistory();
+};
+
+// coin katar jonno
+function renderCards() {
+  cardsGrid.innerHTML = '';
+  services.forEach(svc => {
+    const card = createEl('div', 'card');
+   
+    // Heart button 
+    const heartBtn = createEl('button', 'heart-btn');
+    heartBtn.setAttribute('aria-label', 'Favorite');
+    heartBtn.innerHTML = `<i class="fa-regular fa-heart"></i>`;
+    heartBtn.onclick = () => {
+      const isFavorited = heartBtn.classList.toggle('favorited');
+      const icon = heartBtn.querySelector('i');
+      if(isFavorited){
+        icon.classList.remove('fa-regular');
+        icon.classList.add('fa-solid');
+        heartCount++;
+      } else {
+        icon.classList.remove('fa-solid');
+        icon.classList.add('fa-regular');
+        heartCount--;
+      }
+      navHeart.textContent = heartCount;
+    };
+    card.appendChild(heartBtn);
+
+    // img er jonno 
+    const topCenter = createEl('div','top-center');
+    const iconBox = createEl('div','icon-box');
+
+    // Add image 
+    const iconImg = document.createElement('img');
+    iconImg.src = svc.img; // <== This pulls the PNG from the data object
+    iconImg.alt = `${svc.name} icon`;
+    iconImg.style.width = '100%';
+    iconImg.style.height = '100%';
+    iconImg.style.objectFit = 'contain';
+    iconBox.appendChild(iconImg);
+    topCenter.appendChild(iconBox);
+
+    const title = createEl('h4','service-title', svc.name);
+    topCenter.appendChild(title);
+    card.appendChild(topCenter);
+
+    // Hotline number
+    const hotline = createEl('div','hotline', svc.number);
+    card.appendChild(hotline);
+
+    // Badge with category
+    const badge = createEl('div','badge', svc.category);
+    card.appendChild(badge);
+
+    // Action buttons  er container
+    const actions = createEl('div','card-actions');
+
+    // Call button
+    const callBtn = createEl('button','btn call');
+    callBtn.setAttribute('aria-label', `Call ${svc.name}`);
+    callBtn.innerHTML = `<i class="fa-solid fa-phone"></i> Call`;
+    callBtn.onclick = () => {
+      if (coinCount >= 20) {
+        alert(`Calling ${svc.name} at number: ${svc.number}`);
+        addCallHistory(svc.name, svc.number);
+
+        coinCount -= 20;
+        coinCountEl.textContent = coinCount;
+      } else {
+        alert('Insufficient coins to make a call.');
+      }
+    };
+    actions.appendChild(callBtn);
+
+    // Copy button
+    const copyBtn = createEl('button','btn copy');
+    copyBtn.setAttribute('aria-label', `Copy number for ${svc.name}`);
+    copyBtn.innerHTML = `<i class="fa-regular fa-copy"></i> Copy`;
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(svc.number).then(() => {
+        alert(`Number ${svc.number} copied to clipboard.`);
+        copyCount++;
+        dummyActionBtn.textContent = `${copyCount} Copy`;
+      });
+    };
+
+    actions.appendChild(copyBtn);
+    card.appendChild(actions);
+
+    cardsGrid.appendChild(card);
+  });
+}
+
+
+// rendering
+renderCards();
+renderCallHistory();
+coinCountEl.textContent = coinCount;
+navHeart.textContent = heartCount;
+dummyActionBtn.textContent = `${copyCount} Copy`;
+</script>
 
 
 </body>
