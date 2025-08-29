@@ -42,11 +42,14 @@ body{
   align-items:center;
   gap:12px;
 }
+
+
+
 .logo{
   width:44px;
   height:44px;
   border-radius:50%;
-  background:linear-gradient(180deg,#facc15,#ef4444);
+  /* background:linear-gradient(180deg,#facc15,#ef4444); */
   display:inline-flex;
   place-items:center;
   justify-content:center;
@@ -264,6 +267,9 @@ body{
   color:white;
   border:none;
 }
+
+
+
 /* RIGHT historrry shurrru */
 .history{
   background:white;
@@ -590,6 +596,14 @@ function renderCards() {
     const title = createEl('h4','service-title', svc.name);
     topCenter.appendChild(title);
     card.appendChild(topCenter);
+
+    
+//   subtitle add korte  muted text
+const subtitle = createEl('div','service-sub', svc.name_en);
+topCenter.appendChild(subtitle);
+
+
+
 
     // Hotline number
     const hotline = createEl('div','hotline', svc.number);
